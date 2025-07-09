@@ -1,0 +1,92 @@
+.course-card {
+  background-color: #fff;
+  padding: 24px 28px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+  transition: box-shadow 0.2s ease;
+}
+
+.course-card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.course-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 18px;
+}
+
+.course-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 12px;
+  column-gap: 40px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.course-meta div {
+  display: flex;
+  gap: 6px;
+}
+
+.course-meta strong {
+  font-weight: 600;
+  color: #333;
+  min-width: 100px;
+}
+
+.course-meta span {
+  color: #666;
+  flex: 1;
+}
+
+/* Buttons */
+.course-actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 14px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #1976d2;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #115293;
+}
+
+.btn-danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+}
+
+/* Simple card */
+.course-card.simple {
+  border-left: 4px solid #1976d2;
+  background-color: #f9f9fc;
+  padding: 20px;
+}
+
+.course-card.simple h3 {
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}

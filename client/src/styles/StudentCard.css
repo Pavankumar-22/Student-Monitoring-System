@@ -1,0 +1,58 @@
+.student-card {
+  padding: 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.student-card h4 {
+  margin: 0 0 6px 0;
+}
+
+.student-card-detail {
+  padding: 20px;
+  border-radius: 6px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.student-card-detail h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.student-card-detail p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.student-card-actions {
+  margin-top: 20px;
+}
+
+.student-card-actions button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.student-card-actions .danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.student-card-actions .danger:hover {
+  background-color: #c82333;
+}
+.guardian-info {
+  background-color: #f5f5f5;
+  padding: 0.6rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+}

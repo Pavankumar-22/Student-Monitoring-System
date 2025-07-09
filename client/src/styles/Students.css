@@ -1,0 +1,57 @@
+.dash-layout {
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.dash-sidebar {
+  width: 260px;
+  background: #f4f4f4;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.dash-sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.dash-student-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dash-student-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dash-student-item:hover {
+  background: #e6e6e6;
+}
+
+.dash-student-item.active {
+  background: #d6ecff;
+  border-color: #007bff;
+  font-weight: 600;
+}
+
+.dash-main {
+  flex: 1;
+  padding: 40px;
+  background: #ffffff;
+  overflow-y: auto;
+}
+
+.dash-empty {
+  color: #888;
+  font-size: 16px;
+}
