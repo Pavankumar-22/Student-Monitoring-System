@@ -3,7 +3,8 @@ const dotenv = require('dotenv');//understand the difference betwen const and im
 dotenv.config();
 const connectDB = require('./config/db');
 const app = require('./app');
-const PORT = 5000;
+
+const PORT = process.env.PORT
 // const app = express();
 
 connectDB().then(()=>{

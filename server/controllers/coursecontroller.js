@@ -1,28 +1,32 @@
-const Course = require('../models/course');
+const courseService = require('../services/courseService');
+const logger = require('../utils/logger'); // optional if you use logger
 
 exports.getCourses = async (req, res) => {
-  const courses = await Course.find();
-  res.json(courses);
+  try {
+    const result = await courseService.getAllCourses();
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error getting courses: " + err.message);
+    res.status(500).json({ error: "Server error" });
+  }
 };
 
 exports.createCourse = async (req, res) => {
   try {
-    const { code, title, description } = req.body;
-    if (!code || !title) {
-      return res.status(400).json({ error: 'Missing required fields' });
-    }
-    const course = await Course.create({ code, title, description });
-    res.status(201).json(course);
+    const result = await courseService.createCourse(req.body);
+    res.status(result.status).json(result.data);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    logger.error("Error creating course: " + err.message);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
 exports.deleteCourseByCode = async (req, res) => {
-  const { code } = req.params;
-  const deleted = await Course.findOneAndDelete({ code });
-  if (!deleted) return res.status(404).json({ error: 'Course not found' });
-  res.json({ message: 'Course deleted' });
+  try {
+    const result = await courseService.deleteCourseByCode(req.params.code);
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error deleting course: " + err.message);
+    res.status(500).json({ error: "Server error" });
+  }
 };
-
-//update the file names and controller should also updated

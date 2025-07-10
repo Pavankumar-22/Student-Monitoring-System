@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {getStudents,createStudent,deleteStudentById,getStudentById} = require("../controllers/studentcontrollers");
-// const { getStudentById } = require("../../client/src/services/studentAPI");
+const studentController = require("../controllers/studentcontrollers");
 
-router.get("/", getStudents);
-router.post("/", createStudent);
-router.delete("/:id", deleteStudentById);
-router.get("/:id",getStudentById);
+router.get("/", studentController.getAllStudents);
+router.post("/create", studentController.createStudent);
+router.get("/view/:id", studentController.getStudentById);
+router.delete("/delete/:id", studentController.deleteStudentById);
 
 module.exports = router;

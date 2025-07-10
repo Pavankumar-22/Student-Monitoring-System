@@ -1,52 +1,46 @@
-const Student = require("../models/Studentmodel");
+const studentService = require("../services/studentService");
+const logger = require("../utils/logger");
 
-// to get all the details of the students
-exports.getStudents = async(req,res)=>{
-    const students = await Student.find();
-    res.json(students);
+exports.getAllStudents = async (req, res) => {
+  try {
+    const result = await studentService.getAllStudents();
+    logger.info("Fetched all students");
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error fetching students: " + err.message);
+    res.status(500).json({ error: "Server error" });
+  }
 };
-
-
-//to add new student into the db
 
 exports.createStudent = async (req, res) => {
   try {
-    const { id, name, age, Mobile } = req.body;
-    if (!id || !name || !age || !Mobile) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-    const student = await Student.create({ id, name, age, Mobile });
-    res.status(201).json(student);
+    const result = await studentService.createStudent(req.body);
+    logger.info(`Created student with id: ${result.data._id}`);
+    res.status(result.status).json(result.data);
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    logger.error("Error creating student: " + err.message);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
+exports.getStudentById = async (req, res) => {
+  try {
+    const result = await studentService.getStudentById(req.params.id);
+    logger.info(`Fetched student with id: ${result.data._id}`);
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error getting student: " + err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 exports.deleteStudentById = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    const deleted = await Student.findOneAndDelete({ id });
-
-    if (!deleted) {
-      return res.status(404).json({ error: "Student not found" });
-    }
-
-    res.status(200).json({ message: "Student deleted successfully" });
+    const result = await studentService.deleteStudentById(req.params.id);
+    logger.info(`Deleted student with id: ${result.data._id}`);
+    res.status(result.status).json(result.data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-// Get a single student by MongoDB _id (not studentid)
-exports.getStudentById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const student = await Student.findOne({id});
-    if (!student) return res.status(404).json({ error: "Student not found" });
-    res.json(student);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    logger.error("Error deleting student: " + err.message);
+    res.status(500).json({ error: "Server error" });
   }
 };

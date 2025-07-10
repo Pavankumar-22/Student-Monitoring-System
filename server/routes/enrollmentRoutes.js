@@ -6,8 +6,8 @@ const {
   deleteEnrollmentById,
 } = require("../controllers/enrollmentcontroller");
 
-router.get("/", getEnrollments);
-router.post("/", createEnrollment);
-router.delete("/:id", deleteEnrollmentById);
+router.get("/enrollments", getEnrollments);
+router.post("/enrollments", createEnrollment);
+router.delete("/enrollments/:id", deleteEnrollmentById);
 
 module.exports = router;

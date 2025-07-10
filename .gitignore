@@ -15,7 +15,7 @@ client/.env
 
 
 # Logs
-logs
+logs/
 *.log
 
 # Build

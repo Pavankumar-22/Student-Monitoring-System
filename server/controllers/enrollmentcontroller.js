@@ -1,28 +1,35 @@
-const Enrollment = require('../models/Enrollment');
+const enrollmentService = require("../services/enrollmentService");
+const logger = require("../utils/logger");
 
 exports.getEnrollments = async (req, res) => {
-  const enrollments = await Enrollment.find().populate('student course');
-  res.json(enrollments);
+  try {
+    const result = await enrollmentService.getEnrollments();
+    logger.info("Fetched all enrollments");
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error getting enrollments: " + err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 exports.createEnrollment = async (req, res) => {
   try {
-    const { studentId, courseId, date } = req.body;
-    if (!studentId || !courseId) {
-        return res.status(400).json({ error: 'Missing student or course ID' });
-    }
-    const enrollment = await Enrollment.create({ studentId, courseId, date });
-    const exists = await Enrollment.findOne({ student, course });
-        if (exists) return res.status(409).json({ error: 'Already enrolled' });
-        }
-        catch (err){
-            res.status(400).json({ error: err.message });
-        }
+    const result = await enrollmentService.createEnrollment(req.body);
+    logger.info("Enrollment created");
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error creating enrollment: " + err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 exports.deleteEnrollmentById = async (req, res) => {
-  const { id } = req.params;
-  const deleted = await Enrollment.findByIdAndDelete(id);
-  if (!deleted) return res.status(404).json({ error: 'Enrollment not found' });
-  res.json({ message: 'Enrollment deleted' });
+  try {
+    const result = await enrollmentService.deleteEnrollmentById(req.params.id);
+    logger.info("Enrollment deleted");
+    res.status(result.status).json(result.data);
+  } catch (err) {
+    logger.error("Error deleting enrollment: " + err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
