@@ -1,4 +1,4 @@
-const API_URL = "/api/enrollments";
+const API_URL = "api/enrollments/get";
 
 export const getAllEnrollments = async () => {
   const res = await fetch(API_URL);

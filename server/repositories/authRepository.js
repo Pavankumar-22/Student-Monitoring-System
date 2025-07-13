@@ -1,18 +1,22 @@
 const User = require("../models/User");
 
-exports.findUserByUsername = async (username) => {
-  return await User.findOne({ username });
+// Find user by username (used during login and registration)
+exports.findUserByUsername = (username) => {
+  return User.findOne({ username });
 };
 
-exports.createUser = async (userData) => {
+// Create a new user
+exports.createUser = (userData) => {
   const user = new User(userData);
-  return await user.save();
+  return user.save();
 };
 
-exports.getAllUsers = async () => {
-  return await User.find();
+// Get all users (excluding passwords)
+exports.getAllUsers = () => {
+  return User.find().select("-password");
 };
 
-exports.deleteUserById = async (id) => {
-  return await User.findByIdAndDelete(id);
+// Delete a user by ID
+exports.deleteUserById = (id) => {
+  return User.findByIdAndDelete(id);
 };

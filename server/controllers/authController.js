@@ -1,39 +1,29 @@
 const authService = require("../services/authService");
 
-exports.login = async (req, res) => {
+exports.getUsers = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const result = await authService.loginUser(username, password);
-    res.json(result);
+    const users = await authService.getAllUsers();
+    res.status(200).json(users);
   } catch (err) {
-    res.status(401).json({ error: err.message });
+    res.status(500).json({ error: "Failed to fetch users" });
   }
 };
 
 exports.register = async (req, res) => {
   try {
-    const newUser = await authService.registerUser(req.body);
-    res.status(201).json(newUser);
+    const user = await authService.register(req.body);
+    res.status(201).json({ message: "User registered", user });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-exports.getUsers = async (req, res) => {
+exports.login = async (req, res) => {
   try {
-    const users = await authService.getAllUsers();
-    res.json(users);
+    const { username, password } = req.body;
+    const result = await authService.login(username, password);
+    res.status(200).json(result);
   } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await authService.deleteUserById(id);
-    res.json({ message: "User deleted" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(401).json({ error: err.message });
   }
 };

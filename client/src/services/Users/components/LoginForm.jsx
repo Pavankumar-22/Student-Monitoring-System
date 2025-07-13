@@ -1,40 +1,56 @@
+// src/services/Users/components/LoginForm.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../../api/authAPI";
-import "../../../styles/LoginForm.css";
+import { useAuth } from "../../../context/authContext";
+import { loginUser } from "../../../api/userAPI";
 
 function LoginForm() {
-  const [credentials, setCredentials] = useState({ username: "", password: "" });
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    role: "staff", // Default role
+  });
+  const [msg, setMsg] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await loginUser(credentials);
-    if (res.success) {
-      // save token, for example:
-      localStorage.setItem("token", res.data.token);
-      navigate("/"); // redirect after login
-    } else {
-      setError(res.message);
+    try {
+      const data = await loginUser(form); // Send role also to backend
+      if (data.user.role !== form.role) throw new Error("Role mismatch");
+      login(data.user); // Save user in context
+      setMsg("Login successful");
+    } catch (err) {
+      setMsg("Login failed: " + err.message);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <label>Username:
-        <input type="text" name="username" value={credentials.username} onChange={handleChange} required />
-      </label>
-      <label>Password:
-        <input type="password" name="password" value={credentials.password} onChange={handleChange} required />
-      </label>
-      {error && <p className="error">{error}</p>}
+    <form onSubmit={handleSubmit}>
+      <input
+        name="username"
+        placeholder="Username"
+        value={form.username}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+        required
+      />
+      <select name="role" value={form.role} onChange={handleChange}>
+        <option value="staff">Login as Staff</option>
+        <option value="admin">Login as Admin</option>
+      </select>
       <button type="submit">Login</button>
+      <p>{msg}</p>
     </form>
   );
 }

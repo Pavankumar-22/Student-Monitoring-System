@@ -1,9 +1,15 @@
 const express = require("express");
-const router = express.Router();
-const {getCourses,createCourse,deleteCourseByCode,} = require("../controllers/coursecontroller"); // fixed filename casing
+const { getCourses,createCourse,deleteCourseByCode } = require("../controllers/coursecontroller");
 
-router.get("/", getCourses);
-router.post("/create/", createCourse);
-router.delete("/delete/:code", deleteCourseByCode);
+class CourseRoutes {
+  router = express.Router();
 
-module.exports = router;
+  setRoutes() {
+    this.router.get("/get", getCourses);
+    this.router.post("/create", createCourse);
+    this.router.delete("/delete/:code", deleteCourseByCode);
+    return this.router;
+  }
+}
+
+module.exports = new CourseRoutes().setRoutes();

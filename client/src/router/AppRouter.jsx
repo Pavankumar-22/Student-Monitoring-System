@@ -13,6 +13,10 @@ import StudentDetail from "../services/students/components/StudentDetail";
 import Home from "../shared/layout/Home";
 import Courses from "../services/Courses/pages/Courses";
 import Users from "../services/Users/pages/Users"
+import Login from "../services/Users/pages/LoginPage";
+import Register from "../services/Users/pages/RegisterPage";
+import AuthPage from "../services/Users/pages/authPage";
+
 
 function AppRouter() {
   return (
@@ -29,6 +33,10 @@ function AppRouter() {
       <Route path="/attendance" element = {<Attendance/>}/>
       <Route path="/view/:id" element={<StudentDetail />} />
       <Route path="/users" element={<Users/>}/>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/auth" element={<AuthPage />} />
+
     </Routes>
   );
 }

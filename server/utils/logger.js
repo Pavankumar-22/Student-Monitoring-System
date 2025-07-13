@@ -4,9 +4,10 @@ const { combine, timestamp, printf, colorize } = format;
 const logFormat = printf(({ level, message, timestamp }) => {
   return `[${timestamp}] ${level}: ${message}`;
 });
+//logger should have specific format like info error 
 
 const logger = createLogger({
-  level: "info",
+  level: "info",     //capture both info error and warn based on its hieracrhy
   format: combine(timestamp({ format: "YYYY-MM-DD HH:mm:ss" }), logFormat),
   transports: [
     new transports.Console({ format: combine(colorize(), logFormat) }),
@@ -21,4 +22,4 @@ const logger = createLogger({
   ],
 });
 
-module.exports = logger;
+module.exports = logger;  

@@ -1,4 +1,4 @@
-const API_URL = "/courses";
+const API_URL = "api/courses/get";
 
 export const getAllCourses = async () => {
   const res = await fetch(API_URL);

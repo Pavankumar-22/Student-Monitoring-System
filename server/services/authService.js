@@ -1,21 +1,27 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const authRepo = require("../repositories/authRepository");
+const logger = require("../utils/logger");
 
-exports.loginUser = async (username, password) => {
-  const user = await authRepo.findUserByUsername(username);
-  if (!user || !(await user.matchPassword(password))) {
-    throw new Error("Invalid credentials");
-  }
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
-  return { user, token };
+exports.getAllUsers = async () => {
+  return await authRepo.getAllUsers();
 };
 
-exports.registerUser = async (data) => {
-  const existing = await authRepo.findUserByUsername(data.username);
-  if (existing) throw new Error("User already exists");
-  const hashed = await bcrypt.hash(data.password, 10);
-  return await authRepo.createUser({ ...data, password: hashed });
+exports.register = async (data) => {
+  const existing = await authRepo.findByUsername(data.username);
+  if (existing) throw new Error("Username already exists");
+  const user = await authRepo.create(data);
+  logger.info(`User registered: ${user.username}`);
+  return user;
+};
+
+exports.login = async (username, password) => {
+  const user = await authRepo.findByUsername(username);
+  if (!user || !(await user.matchPassword(password))) {
+    logger.warn(`Invalid login for username: ${username}`);
+    throw new Error("Invalid credentials");
+  }
+
+  const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  logger.info(`User logged in: ${user.username}`);
+  return { token, user: { id: user._id, username: user.username, role: user.role } };
 };

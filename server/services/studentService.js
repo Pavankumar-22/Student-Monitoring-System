@@ -39,3 +39,5 @@ exports.deleteStudentById = async (id) => {
     return { status: 500, data: { error: err.message } };
   }
 };
+
+//if you have multiple function try to write in class structure

@@ -1,13 +1,15 @@
 const express = require("express");
-const router = express.Router();
-const {
-  getEnrollments,
-  createEnrollment,
-  deleteEnrollmentById,
-} = require("../controllers/enrollmentcontroller");
+const { getEnrollments,createEnrollment,deleteEnrollmentById } = require("../controllers/enrollmentcontroller");
 
-router.get("/enrollments", getEnrollments);
-router.post("/enrollments", createEnrollment);
-router.delete("/enrollments/:id", deleteEnrollmentById);
+class EnrollmentRoutes {
+  router = express.Router();
 
-module.exports = router;
+  setRoutes() {
+    this.router.get("/get", getEnrollments);
+    this.router.post("/create", createEnrollment);
+    this.router.delete("/delete/:id", deleteEnrollmentById);
+    return this.router;
+  }
+}
+
+module.exports = new EnrollmentRoutes().setRoutes();

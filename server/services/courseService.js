@@ -21,7 +21,7 @@ exports.createCourse = async (data) => {
   return { status: 201, data: newCourse };
 };
 
-exports.deleteCourseByCode = async (code) => {
+exports.deleteCourseByCode = async (code) => {//code =123
   const deleted = await courseRepo.deleteByCode(code);
   if (!deleted) {
     return { status: 404, data: { error: 'Course not found' } };

@@ -1,9 +1,15 @@
 const express = require("express");
-const router = express.Router();
-const attendanceController = require("../controllers/attendancecontroller");
+const AttendanceController = require("../controllers/attendancecontroller");
 
-router.get("/", attendanceController.getAllAttendance);
-router.post("/mark", attendanceController.markAttendance);
-router.delete("/delete/:id", attendanceController.deleteAttendanceById);
+class AttendanceRoutes {
+  router = express.Router();
 
-module.exports = router;
+  setRoutes() {
+    this.router.get("/", AttendanceController.getAllAttendance);           // GET /api/attendance
+    this.router.post("/mark", AttendanceController.markAttendance);       // POST /api/attendance/mark
+    // this.router.delete("/delete/:id", AttendanceController.deleteAttendanceById); // DELETE /api/attendance/delete/:id
+    return this.router;
+  }
+}
+
+module.exports = new AttendanceRoutes().setRoutes();
