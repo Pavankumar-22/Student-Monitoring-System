@@ -7,7 +7,7 @@ class StudentRoutes {
   setRoutes() {
     this.router.get("/", StudentController.getAllStudents);
     this.router.post("/create", StudentController.createStudent);
-    this.router.get("/view/:id", StudentController.getStudentById);
+    this.router.get("/:id", StudentController.getStudentById);
     this.router.delete("/delete/:id", StudentController.deleteStudentById);
     return this.router;
   }

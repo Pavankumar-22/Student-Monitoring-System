@@ -49,6 +49,17 @@ class EnrollmentRepository {
       throw err;
     }
   }
+
+  async count(filter) {
+    try {
+      const total = await Enrollment.countDocuments(filter);
+      logger.info(`Counted ${total} enrollments for filter: ${JSON.stringify(filter)}`);
+      return total;
+    } catch (err) {
+      logger.error("Error counting enrollments: " + err.message);
+      throw err;
+    }
+  }
 }
 
 module.exports = new EnrollmentRepository();

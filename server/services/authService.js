@@ -19,17 +19,17 @@ exports.login = async (username, password, role) => {
   console.log("Found user:", user);
 
   if (!user) {
-    console.log("❌ User not found");
+    console.log("User not found");
     throw new Error("Invalid credentials");
   }
 
   const isMatch = await user.matchPassword(password);
   console.log("Password match result:", isMatch);
-  // console.log("Type of matchPassword:", typeof user.matchPassword); // should be 'function'
+  // console.log("Type of matchPassword:", typeof user.matchPassword); 
 
 
   if (!isMatch) {
-    logger.warn(`❌ Invalid password for username: ${username}`);
+    logger.warn(` Invalid password for username: ${username}`);
     throw new Error("Invalid credentials");
   }
 

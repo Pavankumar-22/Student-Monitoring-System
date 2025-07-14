@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { useAuth } from "../../../context/authContext";
 import { loginUser } from "../../../api/authAPI";
 import "../../../styles/LoginForm.css"
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -33,6 +35,7 @@ const handleSubmit = async (e) => {
 
     login(user); // Save user in context
     setMsg("Login successful");
+    navigate("/dashboard");
   } catch (err) {
     setMsg("Login failed: " + err.message);
   }

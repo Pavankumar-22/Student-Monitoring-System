@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { getAllCourses, deleteCourse } from "../../../api/courseAPI";
+import { getAllEnrollments } from "../../../api/enrollmentAPI"; // 👈 Add this
 import SearchBar from "../../../shared/layout/SearchBar";
 import CourseCard from "../components/CourseCard";
-import "../../../styles/Courses.css"; // ✅ NEW import
+import "../../../styles/Courses.css";
 
 function Courses() {
   const [courses, setCourses] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [enrollments, setEnrollments] = useState([]); // 👈 Add this
 
   useEffect(() => {
     getAllCourses().then((data) => {
       setCourses(data);
       setFiltered(data);
       setSelectedCourse(data[0] || null);
+    });
+
+    getAllEnrollments().then((data) => {
+      setEnrollments(data);
     });
   }, []);
 
@@ -75,6 +81,7 @@ function Courses() {
             course={selectedCourse}
             onDelete={handleDelete}
             layout="detail"
+            enrollments={enrollments} // ✅ Pass enrollments here
           />
         ) : (
           <p className="course-empty">📌 Select a course to view details</p>
