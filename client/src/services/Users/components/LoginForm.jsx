@@ -1,7 +1,8 @@
 // src/services/Users/components/LoginForm.jsx
 import React, { useState } from "react";
 import { useAuth } from "../../../context/authContext";
-import { loginUser } from "../../../api/userAPI";
+import { loginUser } from "../../../api/authAPI";
+import "../../../styles/LoginForm.css"
 
 function LoginForm() {
   const { login } = useAuth();
@@ -16,20 +17,30 @@ function LoginForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await loginUser(form); // Send role also to backend
-      if (data.user.role !== form.role) throw new Error("Role mismatch");
-      login(data.user); // Save user in context
-      setMsg("Login successful");
-    } catch (err) {
-      setMsg("Login failed: " + err.message);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const result = await loginUser(form); // Send username, password, role
+
+    if (!result.success) {
+      throw new Error(result.message);
     }
-  };
+
+    const user = result.data.user;
+    if (user.role !== form.role) {
+      throw new Error("Role mismatch");
+    }
+
+    login(user); // Save user in context
+    setMsg("Login successful");
+  } catch (err) {
+    setMsg("Login failed: " + err.message);
+  }
+};
+
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="login-form" onSubmit={handleSubmit}>
       <input
         name="username"
         placeholder="Username"

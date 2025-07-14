@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-title">
-        <NavLink to="/">Student Monitoring System</NavLink>
+        <NavLink to={user ? "/dashboard" : "/"}>Student Monitoring System</NavLink>
       </div>
       <ul className="navbar-links">
         {user && (
@@ -19,8 +19,8 @@ function Navbar() {
             <li><NavLink to="/enrollments">Enrollments</NavLink></li>
             <li><NavLink to="/courses">Courses</NavLink></li>
             <li><NavLink to="/attendance">Attendance</NavLink></li>
-            <li><NavLink to="/analytics">Analysis</NavLink></li>
-            {user.role === "admin" && <li><NavLink to="/users">Users</NavLink></li>}
+            {user.role === "admin " && <li><NavLink to="/analytics">Analysis</NavLink></li>}
+            <li><NavLink to="/users">Users</NavLink></li>
             <li><button onClick={logout}>Logout</button></li>
           </>
         )}

@@ -1,5 +1,5 @@
 import React from "react";
-// import "../../../styles/";
+import "../../../styles/UserCard.css"; // ✅ Import CSS
 
 function UserCard({ user, isActive, onSelect }) {
   if (!user) return null;

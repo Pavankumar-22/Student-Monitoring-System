@@ -1,0 +1,44 @@
+.users-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.users-list {
+  flex: 1;
+}
+
+.user-details {
+  flex: 1;
+  background: #f7f7f7;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user-btn {
+  margin-right: 0.5rem;
+  background-color: #0077b6;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-btn.delete {
+  background-color: #e63946;
+}

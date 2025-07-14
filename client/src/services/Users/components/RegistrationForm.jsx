@@ -1,6 +1,7 @@
 // src/services/Users/components/RegistrationForm.jsx
 import React, { useState } from "react";
 import { registerUser } from "../../../api/userAPI";
+import "../../../styles/RegistrationForm.css"
 
 function RegistrationForm() {
   const [form, setForm] = useState({
@@ -27,7 +28,7 @@ function RegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="register-form" onSubmit={handleSubmit}>
       <input
         name="username"
         placeholder="Username"

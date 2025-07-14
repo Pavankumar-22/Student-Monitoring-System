@@ -1,90 +1,60 @@
-/* src/services/Users/components/RegistrationForm.css */
-
-.registration-form-container {
+.register-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Full viewport height */
-  background-color: #f0f2f5; /* Light gray background */
-  font-family: 'Arial', sans-serif;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.registration-form {
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 450px; /* Slightly wider to accommodate more inputs */
+.register-form h2 {
   text-align: center;
+  color: #333;
 }
 
-.registration-form h2 {
-  margin-bottom: 30px;
-  color: #333333;
-  font-size: 28px;
+.register-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
 
-.registration-form input[type="text"],
-.registration-form input[type="email"],
-.registration-form input[type="password"],
-.registration-form select {
-  width: calc(100% - 20px); /* Account for padding */
-  padding: 12px 10px;
-  margin-bottom: 20px;
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  -webkit-appearance: none; /* Remove default browser styling for select */
-  -moz-appearance: none;
-  appearance: none;
-  background-color: #ffffff; /* Ensure background color for select */
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2C197.973L146.2%2C57.173L5.4%2C197.973H287z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow for select */
-  background-repeat: no-repeat;
-  background-position: right 10px top 50%;
-  background-size: 12px;
-}
-
-.registration-form input[type="text"]:focus,
-.registration-form input[type="email"]:focus,
-.registration-form input[type="password"]:focus,
-.registration-form select:focus {
-  border-color: #28a745; /* Highlight on focus (green for registration) */
+.register-form input:focus {
+  border-color: #007bff;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
 }
 
-.registration-form button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background-color: #28a745; /* Green for registration button */
-  color: #ffffff;
+.register-form button {
+  padding: 10px;
+  background-color: #007bff;
   border: none;
-  border-radius: 5px;
-  font-size: 18px;
+  color: white;
+  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-.registration-form button[type="submit"]:hover {
-  background-color: #218838; /* Darker green on hover */
+.register-form button:hover {
+  background-color: #0056b3;
 }
 
-.registration-form p {
-  margin-top: 20px;
-  font-size: 15px;
-  color: #666666;
-  min-height: 20px; /* To prevent layout shift when message appears */
+.register-form p {
+  text-align: center;
+  margin: 0;
+  font-size: 0.95rem;
 }
 
-.registration-form p.success {
-  color: #28a745; /* Green for success messages */
-  font-weight: bold;
+.register-form .error {
+  color: #e63946;
 }
 
-.registration-form p.error {
-  color: #dc3545; /* Red for error messages */
-  font-weight: bold;
+.register-form .success {
+  color: #2a9d8f;
 }
