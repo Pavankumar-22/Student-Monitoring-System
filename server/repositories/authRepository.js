@@ -13,6 +13,10 @@ exports.getAllUsers = () => {
   return User.find().select("-password");
 };
 
+exports.updateUserById = (id, data) => {
+  return User.findByIdAndUpdate(id, data, { new: true });
+}
+
 exports.deleteUserById = (id) => {
   return User.findByIdAndDelete(id);
 };

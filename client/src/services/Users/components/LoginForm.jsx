@@ -1,8 +1,7 @@
-// src/services/Users/components/LoginForm.jsx
 import React, { useState } from "react";
 import { useAuth } from "../../../context/authContext";
 import { loginUser } from "../../../api/authAPI";
-import "../../../styles/LoginForm.css"
+import "../../../styles/LoginForm.css";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
@@ -11,36 +10,67 @@ function LoginForm() {
   const [form, setForm] = useState({
     username: "",
     password: "",
-    role: "staff", // Default role
+    role: "staff",
   });
+
+  const [errors, setErrors] = useState({});
   const [msg, setMsg] = useState("");
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const validateField = (name, value) => {
+    let err = "";
+
+    if (name === "username") {
+      if (/\s/.test(value)) {
+        err = "Username cannot contain spaces";
+      }
+    }
+
+    if (name === "password") {
+      if (value.length < 6) {
+        err = "Password must be at least 6 characters";
+      } else if (!/[a-zA-Z]/.test(value) || !/\d/.test(value) || !/[!@#$%^&*]/.test(value)) {
+        err = "Password must include letters, numbers, and a special character";
+      } else if (/\s/.test(value)) {
+        err = "Password cannot contain spaces";
+      }
+    }
+
+    setErrors((prev) => ({ ...prev, [name]: err }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const result = await loginUser(form); // Send username, password, role
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+    validateField(name, value);
+  };
 
-    if (!result.success) {
-      throw new Error(result.message);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Final validation check before submit
+    if (errors.username || errors.password) {
+      setMsg("Please fix the errors above.");
+      return;
     }
 
-    const user = result.data.user;
-    if (user.role !== form.role) {
-      throw new Error("Role mismatch");
+    try {
+      const result = await loginUser(form);
+
+      if (!result.success) {
+        throw new Error(result.message);
+      }
+
+      if (result.data.user.role !== form.role) {
+        throw new Error("Role mismatch");
+      }
+
+      login(result.data.user);
+      setMsg("Login successful");
+      navigate("/dashboard");
+    } catch (err) {
+      setMsg("Login failed: " + err.message);
     }
-
-    login(user); // Save user in context
-    setMsg("Login successful");
-    navigate("/dashboard");
-  } catch (err) {
-    setMsg("Login failed: " + err.message);
-  }
-};
-
+  };
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
@@ -51,6 +81,8 @@ const handleSubmit = async (e) => {
         onChange={handleChange}
         required
       />
+      {errors.username && <p className="error">{errors.username}</p>}
+
       <input
         type="password"
         name="password"
@@ -59,12 +91,15 @@ const handleSubmit = async (e) => {
         onChange={handleChange}
         required
       />
+      {errors.password && <p className="error">{errors.password}</p>}
+
       <select name="role" value={form.role} onChange={handleChange}>
         <option value="staff">Login as Staff</option>
         <option value="admin">Login as Admin</option>
       </select>
+
       <button type="submit">Login</button>
-      <p>{msg}</p>
+      {msg && <p>{msg}</p>}
     </form>
   );
 }

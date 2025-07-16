@@ -13,6 +13,7 @@ exports.register = async (data) => {
   logger.info(`User registered: ${user.username}`);
   return user;
 };
+
 exports.login = async (username, password, role) => {
   const user = await authRepo.findUserByUsername(username);
   console.log("Login inputs:", { username, password, role });
@@ -52,6 +53,11 @@ exports.login = async (username, password, role) => {
       username: user.username,
       email: user.email,
       role: user.role,
+      mobile: user.mobile,
+      dob: user.dob,
+      address: user.address,
+      gender: user.gender,
+      status: user.status
     },
   };
 };

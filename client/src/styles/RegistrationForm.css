@@ -1,5 +1,16 @@
+body, html {
+  /* height: 100%; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
+  background-color: rgb(165, 165, 248);
+}
+
 .register-form {
-  max-width: 400px;
+  /*  when scrolling navbar is moving make sure that it is not overlapping the form */
+  position: relative;
+  max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
   background-color: #f9f9f9;
@@ -17,15 +28,18 @@
   color: #333;
 }
 
-.register-form input {
+.register-form input,
+.register-form select {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.3s;
+  font-family: inherit;
 }
 
-.register-form input:focus {
+.register-form input:focus,
+.register-form select:focus {
   border-color: #007bff;
   outline: none;
 }
@@ -37,6 +51,7 @@
   color: white;
   border-radius: 6px;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
