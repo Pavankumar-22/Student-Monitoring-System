@@ -22,6 +22,7 @@ exports.createStudent = async (payload) => {
 
 exports.getStudentById = async (id) => {
   try {
+    console.log("Finding student by ID:", id);
     const student = await studentRepository.findById(id);
     if (!student) return { status: 404, data: { error: "Student not found" } };
     return { status: 200, data: student };

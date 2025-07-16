@@ -1,16 +1,16 @@
 const express = require("express");
 const StudentController = require("../controllers/studentcontrollers");
 
-class StudentRoutes {
-  router = express.Router();
+function StudentRoutes() {
+  const router = express.Router(); 
 
-  setRoutes() {
-    this.router.get("/", StudentController.getAllStudents);
-    this.router.post("/create", StudentController.createStudent);
-    this.router.get("/:id", StudentController.getStudentById);
-    this.router.delete("/delete/:id", StudentController.deleteStudentById);
-    return this.router;
-  }
+  // console.log("StudentRoutes initialized");
+  router.get("/get", StudentController.getAllStudents);
+  router.post("/create", StudentController.createStudent);
+  router.get("/get/:id", StudentController.getStudentById);
+  router.delete("/delete/:id", StudentController.deleteStudentById);
+
+  return router;
 }
 
-module.exports = new StudentRoutes().setRoutes();
+module.exports = StudentRoutes;

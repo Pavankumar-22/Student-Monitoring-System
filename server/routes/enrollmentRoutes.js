@@ -1,15 +1,20 @@
 const express = require("express");
-const { getEnrollments,createEnrollment,deleteEnrollmentById } = require("../controllers/enrollmentcontroller");
+const { 
+  getEnrollments, 
+  createEnrollment, 
+  deleteEnrollmentById 
+} = require("../controllers/enrollmentcontroller");
 
-class EnrollmentRoutes {
-  router = express.Router();
+function EnrollmentRoutes() {
+  const router = express.Router();
 
-  setRoutes() {
-    this.router.get("/get", getEnrollments);
-    this.router.post("/create", createEnrollment);
-    this.router.delete("/delete/:id", deleteEnrollmentById);
-    return this.router;
-  }
+  // console.log("EnrollmentRoutes initialized");
+
+  router.get("/get", getEnrollments);
+  router.post("/create", createEnrollment);
+  router.delete("/delete/:id", deleteEnrollmentById);
+
+  return router;
 }
 
-module.exports = new EnrollmentRoutes().setRoutes();
+module.exports = EnrollmentRoutes;

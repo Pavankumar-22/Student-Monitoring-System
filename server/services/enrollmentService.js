@@ -1,5 +1,5 @@
 const enrollmentRepo = require("../repositories/enrollmentRepository");
-const Course = require("../models/Course");
+const Course = require("../models/course");
 const logger = require("../utils/logger");
 
 // 🔁 Helper: Recount active enrollments and update course

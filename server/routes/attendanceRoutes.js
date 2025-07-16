@@ -1,15 +1,15 @@
 const express = require("express");
 const AttendanceController = require("../controllers/attendancecontroller");
 
-class AttendanceRoutes {
-  router = express.Router();
+function AttendanceRoutes() {
+  const router = express.Router();
 
-  setRoutes() {
-    this.router.get("/", AttendanceController.getAllAttendance);           // GET /api/attendance
-    this.router.post("/mark", AttendanceController.markAttendance);       // POST /api/attendance/mark
-    // this.router.delete("/delete/:id", AttendanceController.deleteAttendanceById); // DELETE /api/attendance/delete/:id
-    return this.router;
-  }
+  // console.log("AttendanceRoutes initialized");
+
+  router.get("/get", AttendanceController.getAllAttendance);           // GET /api/attendance
+  router.post("/mark", AttendanceController.markAttendance);        // POST /api/attendance/mark
+
+  return router;
 }
 
-module.exports = new AttendanceRoutes().setRoutes();
+module.exports = AttendanceRoutes;

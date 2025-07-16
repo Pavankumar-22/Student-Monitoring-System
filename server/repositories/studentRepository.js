@@ -26,7 +26,10 @@ class StudentRepository {
 
   async findById(id) {
     try {
+      // console.log("Finding student by ID:", typeof id);
+      // console.log("ID as string:", id);
       const student = await Student.findOne({ id });
+      // console.log("data:::", student);
       logger.info(`Fetched student with ID: ${id}`);
       return student;
     } catch (err) {

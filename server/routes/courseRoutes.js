@@ -1,15 +1,20 @@
 const express = require("express");
-const { getCourses,createCourse,deleteCourseByCode } = require("../controllers/coursecontroller");
+const { 
+  getCourses, 
+  createCourse, 
+  deleteCourseByCode 
+} = require("../controllers/coursecontroller");
 
-class CourseRoutes {
-  router = express.Router();
+function CourseRoutes() {
+  const router = express.Router();
 
-  setRoutes() {
-    this.router.get("/get", getCourses);
-    this.router.post("/create", createCourse);
-    this.router.delete("/delete/:code", deleteCourseByCode);
-    return this.router;
-  }
+  // console.log("CourseRoutes initialized");
+
+  router.get("/get", getCourses);
+  router.post("/create", createCourse);
+  router.delete("/delete/:code", deleteCourseByCode);
+
+  return router;
 }
 
-module.exports = new CourseRoutes().setRoutes();
+module.exports = CourseRoutes;

@@ -3,7 +3,7 @@ const registerRoutes = require("./routeLoader");
 
 function loadAllRoutes() {
   const router = express.Router();
-  registerRoutes(router); // 🔁 delegate to loader
+  registerRoutes(router);
   return router;
 }
 

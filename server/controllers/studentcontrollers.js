@@ -25,6 +25,7 @@ exports.createStudent = async (req, res) => {
 
 exports.getStudentById = async (req, res) => {
   try {
+  //  console.log("Fetching student by ID:", req.params.id);
     const result = await studentService.getStudentById(req.params.id);
     logger.info(`Fetched student with id: ${result.data._id}`);
     res.status(result.status).json(result.data);

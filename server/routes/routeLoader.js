@@ -1,17 +1,19 @@
-const studentRoutes = require("./studentRoutes");
-const attendanceRoutes = require("./attendanceRoutes");
-const courseRoutes = require("./courseRoutes");
-const enrollmentRoutes = require("./enrollmentRoutes");
-// const feeRoutes = require("./FeeRoutes");
-const authRoutes = require("./authRoutes");
+const StudentRoutes = require("./studentRoutes");
+const AttendanceRoutes = require("./attendanceRoutes");
+const CourseRoutes = require("./courseRoutes");
+const EnrollmentRoutes = require("./enrollmentRoutes");
+// const FeeRoutes = require("./feeRoutes"); 
+const AuthRoutes = require("./authRoutes");
 
 function registerRoutes(router) {
-  router.use("/students", studentRoutes);
-  router.use("/attendance", attendanceRoutes);
-  router.use("/courses", courseRoutes);
-  router.use("/enrollments", enrollmentRoutes);
-//   router.use("/fees", feeRoutes);
-  router.use("/users", authRoutes);
+  console.log("📦 Registering all routes...");
+
+  router.use("/students", StudentRoutes());
+  router.use("/attendance", AttendanceRoutes());
+  router.use("/courses", CourseRoutes());
+  router.use("/enrollments", EnrollmentRoutes());
+  // router.use("/fees", FeeRoutes()); // optional
+  router.use("/users", AuthRoutes());
 }
 
 module.exports = registerRoutes;
