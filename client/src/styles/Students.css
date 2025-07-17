@@ -1,6 +1,8 @@
 .dash-layout {
   display: flex;
+  /* position: fixed; */
   height: 100vh;
+  margin-top: 40px;
   font-family: 'Segoe UI', sans-serif;
 }
 

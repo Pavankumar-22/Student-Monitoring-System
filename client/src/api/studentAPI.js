@@ -1,4 +1,4 @@
-const API_URL = "/api/students";
+const API_URL = "/api/students/get";
 
 // GET all students
 export const getAllStudents = async () => {

@@ -86,7 +86,10 @@ function RegistrationForm() {
       <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} required />
       {errors.password && <p className="error">{errors.password}</p>}
 
-      <input name="mobile" placeholder="Mobile" value={form.mobile} onChange={handleChange} required />
+      <input name="mobile" placeholder="Mobile" value={form.mobile} onChange={(e) => {
+          const val = e.target.value;
+            if (/^\d{0,10}$/.test(val)) handleChange(e);  // Only digits, max 10
+            }} maxLength="10" inputMode="numeric" pattern="\d*" required />
       {errors.mobile && <p className="error">{errors.mobile}</p>}
 
       <input name="dob" type="date" value={form.dob} onChange={handleChange} required />

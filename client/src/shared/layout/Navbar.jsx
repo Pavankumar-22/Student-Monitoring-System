@@ -7,6 +7,11 @@ import { useAuth } from "../../context/authContext";
 function Navbar() {
   const { user, logout } = useAuth();
 
+  const handleLogout = () => {
+    logout();
+    window.location.href = "/";
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-title">
@@ -21,7 +26,7 @@ function Navbar() {
             <li><NavLink to="/attendance">Attendance</NavLink></li>
             {user.role === "admin " && <li><NavLink to="/analytics">Analysis</NavLink></li>}
             <li><NavLink to="/users">Users</NavLink></li>
-            <li><button onClick={logout}>Logout</button></li>
+            <li><button onClick={handleLogout}>Logout</button></li>
           </>
         )}
         {!user && (

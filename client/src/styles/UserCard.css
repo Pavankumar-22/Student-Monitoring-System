@@ -6,19 +6,42 @@
   margin-bottom: 1rem;
   list-style: none;
   transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dash-student-item:hover {
+  background-color: #f9f9f9;
 }
 
 .dash-student-item.active {
-  background-color: #f1f1f1;
+  background-color: #eef6ff;
+  border-color: #007bff;
+}
+
+.dash-student-item strong {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.dash-student-item small {
+  display: block;
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 2px;
+  line-height: 1.4;
 }
 
 .role-badge {
   display: inline-block;
-  margin-top: 0.5rem;
-  padding: 0.2rem 0.6rem;
+  margin-top: 0.6rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 4px;
   font-size: 0.85rem;
+  font-weight: 500;
   color: white;
+  text-transform: capitalize;
 }
 
 .role-badge.admin {

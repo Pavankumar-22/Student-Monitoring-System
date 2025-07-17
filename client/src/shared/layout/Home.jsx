@@ -10,7 +10,7 @@ const Home = () => {
       </div>
 
       <footer className="home-footer">
-        © 2025 Student Monitoring System • Crafted by <span>Pavan</span>
+        © 2025 Student Monitoring System    {/*• Crafted by <span>Pavan</span>*/}
       </footer>
     </div>
   );

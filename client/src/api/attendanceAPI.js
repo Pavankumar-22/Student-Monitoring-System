@@ -1,4 +1,4 @@
-const API_URL = "/api/attendance";
+const API_URL = "/api/attendance/get";
 
 export const getAllAttendanceRecords = async () => {
   const res = await fetch(API_URL);

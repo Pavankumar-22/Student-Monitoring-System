@@ -30,7 +30,7 @@ function EditStudent() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px",marginTop: "20px" } }>
       <h2>Edit Student</h2>
       {student ? (
         <StudentForm initialData={student} onSubmit={handleUpdate} />
